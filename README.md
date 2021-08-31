@@ -1,34 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Objetivo
+A ideia deste projeto é o fornecimento de micro scripts para resolverem problemas específicos, como por exemplo, como usar o JWT em uma aplicação NodeJs.
 
-## Getting Started
+## Parece um stackoverflow? 
+Ok, confesso, parece um pouco, porém, o stackoverflow tem um monte de respostas gigantescas, com um monte de coisa inútil e que não faz parte do escopo de uma solução. 
+Vários trechos de código são cópias de aplicações inteiras em outros contextos, o que faz com que a solução fique ofuscada e custosa em termos de tempo para ser encontrada. Além do mais, muitas respostas não contém a versão testada, um exemplo disso é o uso de nextjs 14 com Firebase, onde uma solução para a versão 8 do Firebase pode não funcionar com a versão 9, e um tutorial do stackoverflow pode esconder esse detalhe.
+Então, afim de facilitar nossa vida, a ideia desse projeto(futuramente) é a geração de scripts exclusivos, comentados e com detalhes de versões para resolver problemas específicos, sem ‘floriamentos‘ ou ruídos.
+## Exemplo:
 
-First, run the development server:
+### Como fazer o C++ reconhecer caracteres UTF-8?
 
-```bash
-npm run dev
-# or
-yarn dev
+| Item | Informação |
+|------|-------------|
+|Sistema Operacional | Windows 10 |
+|Programa | DevC++ |
+|Versão Devc++ | 5.11 (27 de Abril de 2015) |
+|Adicional Devc++ | Programa criado com o create project |
+
+#### Para resolver esse problema basta incluir o locale.h    
+```cplusplus
+#include <iostream>
+```
+#### E posteriormente usar o setLocale   
+```cplusplus
+setlocale(LC_ALL,"portuguese");
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Exemplo de Código Completo:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```cplusplus
+#include <iostream>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+/* Isso afeta outras coisas além da codificação */
+#include <locale.h>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+using namespace std;
 
-## Learn More
+int main() {
+    setlocale(LC_ALL,"portuguese");
+    cout << "Olá Mundo!" << endl;
+    return 0;
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+Resultados:
+Sem o include e o setLocale
+> Ol Mundo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Com o include e o locale
+> Olá mundo
